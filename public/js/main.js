@@ -35,7 +35,6 @@ $(document).ready(function() {
         if(key === 13){
             $("#saveButton").click();
         }
-       //do stuff with "key" here...
    });
 });
 var dataClick = function(e) {
