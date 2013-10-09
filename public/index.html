@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AJ TimeSheets</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body> 
+    <!-- Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Settings</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="lNameText">Last Name</label>
+                <input type="text" class="form-control" id="lNameText" placeholder="Last Name">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="fNameText">First Name</label>
+                <input type="text" class="form-control" id="fNameText" placeholder="First Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="ssText">Last 4 SS #</label>
+              <input type="number" class="form-control" id="ssText" placeholder="Last 4 SS #" min="0" max="9999">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="departmentText">Department</label>
+              <input type="text" class="form-control" id="departmentText" placeholder="Department">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="saveButton">Save changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AJ TimeSheets</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a data-toggle="modal" href="#settingsModal">Settings</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="head">
+        <h6><i>PAYROLL PERIOD: </i><span id="payRoll"></span></h6>
+        <div class="row">
+          <div class="col-md-4"> <h6><i>LAST NAME: </i><span id="lName"></spam></h6> </div>
+          <div class="col-md-4"> <h6><i>FIRST NAME: </i><span id="fName"></span></h6> </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"> <h6><i>LAST 4 SS #: </i><span id="ss"></spam></h6> </div>
+          <div class="col-md-4"> <h6><i>DEPARTMENT: </i><span id="department"></spam></h6> </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="col-md-1">#</th>
+              <th class="col-md-1">Day</th>
+              <th class="col-md-1">Date</th>
+              <th>Time in</th>
+              <th>Meal Period</th>
+              <th>Time out</th>
+              <th>Total</th>
+              <th>Signature</th>
+            </tr>
+          </thead>
+          <tbody id="tBodyContent">
+          </tbody>
+        </table>
+      </div><!-- /.table-responsive -->
+
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.10.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/jstorage.min.js"></script>
+    <script id="tBodyContent-template" type="text/x-handlebars-template">
+    {{#each week}}
+      {{#each this.data}}
+        <tr>
+          <td>{{this.row}}</td>
+          <td>{{this.day}}</td>
+          <td>{{this.date}}</td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+          <td contenteditable="true"></td>
+        </tr> 
+      {{/each}}
+      <tr>
+        <td colspan="6"> WEEK SUB-TOTAL </td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+      </tr>
+    {{/each}}
+
+    <tr>
+      <td colspan="6"> TOTAL-HOURS </td>
+      <td contenteditable="true"></td>
+    </tr> 
+    </script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+body {
+  min-height: 200px;
+  padding-top: 70px;
+}
+th, tr {
+    height:25px;
+    width:50px;
+}
+
+.jumbotron{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.form-inline{
+	padding-bottom:10px;
+}
+
+#ssText{
+	width:30%;
+}
+#departmentText{
+	width:50%;
+
+}
+span{
+	padding-left: 12px;
+}
