@@ -8,7 +8,7 @@
 //         color:"red"
 //     });
 // }
-
+var curr =  Date.today().previous().saturday();// get current date
 var context = {}
 var contactInfo = {
     lastName:"",
@@ -17,18 +17,19 @@ var contactInfo = {
     deparment:""
 }
 var payRoll = "";
-$(document).ready(function() { 
+$(document).ready(function() {
+    curr = curr.addWeeks(-2);
     /* code here */ 
     contactInfo = $.jStorage.get("contactInfo");
 
     getBiWeekly();
-    $("#payRoll").text(payRoll);
 
     appendContact();
 
-    setTemplate();
-
+    //Handle Listener
     $(document).on("click", "#saveButton", saveButton);
+    $(document).on("click", "#previous", prevClick);
+    $(document).on("click", "#next", nextClick);
 
     $("#settingsModal").keypress(function(e) {
         var key = e.which;
@@ -37,6 +38,16 @@ $(document).ready(function() {
         }
    });
 });
+// var dataClick = function(e) {
+//     console.log(e);
+//     if (e.currentTarget.innerHTML != "") return;
+//     if(e.currentTarget.contentEditable != null){
+//         $(e.currentTarget).attr("contentEditable",true);
+//     }
+//     else{
+//         $(e.currentTarget).append("<input type='text'>");
+//     }    
+// }
 var dataClick = function(e) {
     console.log(e);
     if (e.currentTarget.innerHTML != "") return;
@@ -47,30 +58,18 @@ var dataClick = function(e) {
         $(e.currentTarget).append("<input type='text'>");
     }    
 }
-var saveButton = function(){
-    $.jStorage.set("contactInfo", contactInfo = {
-        lastName:"",
-        firstName:"",
-        ss:"",
-        deparment:""
-    });
-
-    contactInfo["lastName"] = $("#lNameText").val();
-    contactInfo["firstName"] = $("#fNameText").val();
-    contactInfo["ss"] = $("#ssText").val();
-    contactInfo["department"] = $("#departmentText").val();
-
-    $.jStorage.set("contactInfo", contactInfo);
-
-    appendContact();
-
-    $('#settingsModal').modal('hide');
+var nextClick = function(){
+    curr = curr.addWeeks(0);
+    console.log(curr);
+    getBiWeekly();
+}
+var prevClick = function(){
+    curr = curr.addWeeks(-4);
+    getBiWeekly();
+    console.log(curr);
 }
 var getBiWeekly = function(){
     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    var curr = new Date; // get current date
-    var first = ( curr.getDate() - curr.getDay() ); // First day is the day of the month - the day of the week
-
 
     context["week"] = [
         {data:[]},
@@ -80,27 +79,23 @@ var getBiWeekly = function(){
     var firstPayRoll = "";
     var lastPayroll ="";
     for(i=0; i < 14; i++){
+        var date = curr.add(1).days().toString("MM/dd/yyyy");
         if(i<7){
-            var date = convertDate(new Date(curr.setDate( first+i )));
             if(i==0)
                 firstPayRoll = date;
             context["week"][0]["data"].push({row:i+1, date:date, day:days[i]});
         }else{
-            var date = convertDate(new Date(curr.setDate( first+i )));
-            if(i==13){
+            if(i==13)
                 lastPayroll = date;
-            }
             context["week"][1]["data"].push({row:i+1, date:date, day:days[i-7]});
         }
-
     }
     payRoll = firstPayRoll + " - " + lastPayroll;
     console.log(context);
+    $("#payRoll").text(payRoll);
+    setTemplate();
 }
-var convertDate = function(inputFormat) {
-  var d = new Date(inputFormat);
-  return [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/');
-}
+
 var appendContact = function() {
     contactInfo = $.jStorage.get("contactInfo");
     if(contactInfo != null){
@@ -113,8 +108,6 @@ var appendContact = function() {
         $("#lNameText").val(contactInfo["lastName"]);
         $("#ssText").val(contactInfo["ss"]);
         $("#departmentText").val(contactInfo["department"]);
-
-        // console.log(contactInfo);
     }
 
 }

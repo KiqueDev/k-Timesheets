@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>AJ TimeSheets</title>
+    <title>k-TimeSheets</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -83,7 +83,11 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="head">
-        <h6><i>PAYROLL PERIOD: </i><span id="payRoll"></span></h6>
+        <h4><i>PAYROLL PERIOD: </i><span id="payRoll"></span> </h4>
+        <ul class="pager">
+          <li><a id="previous">Previous</a></li>
+          <li><a id="next">Next</a></li>
+        </ul>
         <div class="row">
           <div class="col-md-4"> <h6><i>LAST NAME: </i><span id="lName"></spam></h6> </div>
           <div class="col-md-4"> <h6><i>FIRST NAME: </i><span id="fName"></span></h6> </div>
@@ -123,6 +127,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/jstorage.min.js"></script>
+    <script src="js/date.min.js"></script>
     <script id="tBodyContent-template" type="text/x-handlebars-template">
     {{#each week}}
       {{#each this.data}}
