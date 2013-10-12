@@ -25,3 +25,13 @@ th, tr {
 span{
 	padding-left: 12px;
 }
+/*OVERRIDE TIMEPICKER*/
+.bootstrap-timepicker-widget table td a {
+	padding:0px;
+}
+/*.bootstrap-timepicker{
+	max-width:50px !important;
+}*/
+.tp1, .tp2{
+	width:80px;
+}

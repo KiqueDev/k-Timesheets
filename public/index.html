@@ -10,7 +10,9 @@
     <title>k-TimeSheets</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/bootstrap-timepicker.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/custom.css" rel="stylesheet">
@@ -29,7 +31,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Settings</h4>
+            <h4 class="modal-title" >Settings</h4>
           </div>
           <div class="modal-body">
             <div class="form-inline">
@@ -80,14 +82,9 @@
     </div>
 
     <div class="container">
-
       <!-- Main component for a primary marketing message or call to action -->
       <div class="head">
-        <h4><i>PAYROLL PERIOD: </i><span id="payRoll"></span> </h4>
-        <ul class="pager">
-          <li><a id="previous">Previous</a></li>
-          <li><a id="next">Next</a></li>
-        </ul>
+        <h4 id="payrollLabel"><i>PAYROLL PERIOD: </i><span id="payRoll"></span> </h4>
         <div class="row">
           <div class="col-md-4"> <h6><i>LAST NAME: </i><span id="lName"></spam></h6> </div>
           <div class="col-md-4"> <h6><i>FIRST NAME: </i><span id="fName"></span></h6> </div>
@@ -97,6 +94,10 @@
           <div class="col-md-4"> <h6><i>DEPARTMENT: </i><span id="department"></spam></h6> </div>
         </div>
       </div>
+      <ul class="pager">
+        <li><a id="previous" href="">Previous</a></li>
+        <li><a id="next" href="">Next</a></li>
+      </ul>
       <div class="table-responsive">
         <table class="table table-bordered">
           <thead>
@@ -104,10 +105,10 @@
               <th class="col-md-1">#</th>
               <th class="col-md-1">Day</th>
               <th class="col-md-1">Date</th>
-              <th>Time in</th>
-              <th>Meal Period</th>
-              <th>Time out</th>
-              <th>Total</th>
+              <th class="col-md-1">Time in</th>
+              <th class="col-md-1">Meal Period</th>
+              <th class="col-md-1">Time out</th>
+              <th class="col-md-1">Total</th>
               <th>Signature</th>
             </tr>
           </thead>
@@ -125,6 +126,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.10.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-timepicker.min.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/jstorage.min.js"></script>
     <script src="js/date.min.js"></script>
@@ -135,23 +137,23 @@
           <td>{{this.row}}</td>
           <td>{{this.day}}</td>
           <td>{{this.date}}</td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
-          <td contenteditable="true"></td>
+          <td class="bootstrap-timepicker"><input class="input-small tp1" type="text"/></td>
+          <td><a class="btn btn-info mealTime" disabled="disabled">0:00</a></td> 
+          <td class="bootstrap-timepicker"><input class="input-small tp2" type="text"/></td>
+          <td class="results"></td>
           <td contenteditable="true"></td>
         </tr> 
       {{/each}}
       <tr>
         <td colspan="6"> WEEK SUB-TOTAL </td>
-        <td contenteditable="true"></td>
+        <td class="weekTotal"></td>
         <td contenteditable="true"></td>
       </tr>
     {{/each}}
 
     <tr>
       <td colspan="6"> TOTAL-HOURS </td>
-      <td contenteditable="true"></td>
+      <td class="overAllTotal"></td>
     </tr> 
     </script>
     <script src="js/main.js"></script>
