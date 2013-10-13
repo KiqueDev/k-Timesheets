@@ -24,7 +24,7 @@ var prevClick = function(e){
     $('.tp1, .tp2').timepicker('setTime', '');
 }
 var getBiWeekly = function(){
-    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var days = ['SUN','MON','TUES','WED','THURS','FRI','SAT'];
 
     context["week"] = [
         {data:[]},
@@ -113,7 +113,7 @@ var calculateHrs = function(){
                     $(".mealTime").eq(i).html("0:00");
                     $(".mealTime").eq(i).attr("disabled", "disabled");
                 }
-                console.log("Result: " + sHours + ":" + sMinutes);
+                //console.log("Result: " + sHours + ":" + sMinutes);
                 var sHours = hrs.toString();
                 var sMinutes = mins.toString();
                 if(hrs<10) sHours = "0" + sHours;
@@ -146,7 +146,7 @@ var calculateOverTotal = function(){
     if(weekMins<10) sMinutes = "0" + sMinutes;
     $(".overAllTotal").html(sHours + ":" + sMinutes);
     // var total = weekHrs 
-    console.log("overallTotal: " +  sHours + ":" + sMinutes);
+    // console.log("overallTotal: " +  sHours + ":" + sMinutes);
 }
 var convertTime = function(time){
     var hours = Number(time.match(/^(\d+)/)[1]);
@@ -158,7 +158,7 @@ var convertTime = function(time){
     var sMinutes = minutes.toString();
     if(hours<10) sHours = "0" + sHours;
     if(minutes<10) sMinutes = "0" + sMinutes;
-    console.log(sHours + ":" + sMinutes);
+    // console.log(sHours + ":" + sMinutes);
     return sHours + ":" + sMinutes;
 }
 //TEMPLATING
@@ -191,8 +191,8 @@ var addWeekHrs = function(args){
     if(totalHrs<10) sTotalHours = "0" + sTotalHours;
     if(totalMins<10) sTotalMinutes = "0" + sTotalMinutes;
 
-    console.log("Total HOURS: " +sTotalHours);
-    console.log("Total MINS: " +sTotalMinutes);
+    // console.log("Total HOURS: " +sTotalHours);
+    // console.log("Total MINS: " +sTotalMinutes);
 
     $(".weekTotal").eq(args.week).html(sTotalHours+":"+sTotalMinutes);
 }
@@ -201,6 +201,21 @@ var addWeek1 = function(){
 }
 var addWeek2 = function(){
     addWeekHrs({start:7, end:14, week:1});
+}
+var clearBtn = function(e){
+    var id = e.target.id-1;
+    $(".tp1").eq(id).val("");
+    $(".tp2").eq(id).val("");
+    $(".mealTime").eq(id).attr("disabled","disabled");
+    $(".mealTime").eq(id).text("0:00");
+    //$(".results").eq(0).text("");
+}
+var clearAllBtn = function(){
+    $(".tp1").val("");
+    $(".tp2").val("");
+    $(".mealTime").attr("disabled","disabled");
+    $(".mealTime").text("0:00");
+    //$(".results").eq(0).text("");
 }
 $(document).ready(function() {
     curr = curr.addWeeks(-2);
@@ -219,6 +234,12 @@ $(document).ready(function() {
     $(document).on("click", "body", addWeek1);
     $(document).on("click", "body", addWeek2);
     $(document).on("click", "body", calculateOverTotal);
+
+
+    $(document).on("click", ".clearTime", clearBtn);
+    $(document).on("click", ".clearAll", clearAllBtn);
+
+    $(document).on("click", ".pdfBtn", createPDF);
 
     $("#settingsModal").keypress(function(e) {
         var key = e.which;

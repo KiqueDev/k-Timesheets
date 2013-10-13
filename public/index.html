@@ -60,6 +60,20 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" >PDF</h4>
+          </div>
+          <div class="modal-body">
+              <iframe class="preview-pane" width="100%" height="600" frameborder="0"></iframe>
+          </div>
+
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -75,6 +89,7 @@
         <div class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-right">
+            <li><a class="pdfBtn" data-toggle="modal" href="#pdfModal">PDF</a></li>
             <li><a data-toggle="modal" href="#settingsModal">Settings</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -109,7 +124,7 @@
               <th class="col-md-1">Meal Period</th>
               <th class="col-md-1">Time out</th>
               <th class="col-md-1">Total</th>
-              <th>Signature</th>
+              <th class="col-md-1"><center><a class="btn btn-danger clearAll">Clear All</a></center></th>
             </tr>
           </thead>
           <tbody id="tBodyContent">
@@ -131,6 +146,8 @@
     <script src="js/jstorage.min.js"></script>
     <script src="js/date.min.js"></script>
     <script src="js/jspdf.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/createPdf.js"></script>
     <script id="tBodyContent-template" type="text/x-handlebars-template">
     {{#each week}}
       {{#each this.data}}
@@ -139,16 +156,16 @@
           <td>{{this.day}}</td>
           <td>{{this.date}}</td>
           <td class="bootstrap-timepicker"><input class="input-small tp1" type="text"/></td>
-          <td><a class="btn btn-info mealTime" disabled="disabled">0:00</a></td> 
+          <td><center><a class="btn btn-info mealTime" disabled="disabled">0:00</a></center></td> 
           <td class="bootstrap-timepicker"><input class="input-small tp2" type="text"/></td>
           <td class="results"></td>
-          <td contenteditable="true"></td>
+          <td ><center><a class="btn btn-warning clearTime" id={{this.row}}>Clear</a></center></td>
         </tr> 
       {{/each}}
       <tr>
         <td colspan="6"> WEEK SUB-TOTAL </td>
         <td class="weekTotal"></td>
-        <td contenteditable="true"></td>
+        <td></td>
       </tr>
     {{/each}}
 
@@ -157,6 +174,5 @@
       <td class="overAllTotal"></td>
     </tr> 
     </script>
-    <script src="js/main.js"></script>
   </body>
 </html>
