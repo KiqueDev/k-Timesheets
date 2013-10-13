@@ -204,7 +204,7 @@ var addWeek2 = function(){
 }
 $(document).ready(function() {
     curr = curr.addWeeks(-2);
-    /* code here */ 
+
     contactInfo = $.jStorage.get("contactInfo");
 
     getBiWeekly();
