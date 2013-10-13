@@ -217,6 +217,26 @@ var clearAllBtn = function(){
     $(".mealTime").text("0:00");
     //$(".results").eq(0).text("");
 }
+var saveButton = function(){
+    $.jStorage.set("contactInfo", contactInfo = {
+        lastName:"",
+        firstName:"",
+        ss:"",
+        deparment:""
+    });
+
+    contactInfo["lastName"] = $("#lNameText").val();
+    contactInfo["firstName"] = $("#fNameText").val();
+    contactInfo["ss"] = $("#ssText").val();
+    contactInfo["department"] = $("#departmentText").val();
+
+    $.jStorage.set("contactInfo", contactInfo);
+
+    appendContact();
+
+    $('#settingsModal').modal('hide');
+}
+
 $(document).ready(function() {
     curr = curr.addWeeks(-2);
 
