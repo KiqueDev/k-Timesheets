@@ -4,4 +4,4 @@ k-Timesheets
 TimeSheet web apps for employees to get paid on time
 
 
-CHECKOUT THE <a href="http://ktimesheets.aws.af.cm/">LIVE SAMPLE</a>
+CHECKOUT THE <a href="http://ktimesheets.aws.af.cm/">AOOLICATION HERE</a>
