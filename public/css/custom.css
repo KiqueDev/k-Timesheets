@@ -35,3 +35,17 @@ span{
 .tp1, .tp2{
 	width:80px;
 }
+
+#payrollLabel{
+	font-style:italic;
+	font-weight:bold;
+}
+h6{
+	font-style:italic;
+}
+span{
+	font-style:normal;
+}
+.weekTotal, .overAllTotal{
+	font-weight:bold;
+}

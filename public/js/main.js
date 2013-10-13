@@ -80,15 +80,19 @@ var calculateHrs = function(){
             var convertedTp1 = convertTime(tp1).split(":");
             var convertedTp2 = convertTime(tp2).split(":");
 
-          
-            if(parseInt(convertedTp2[0]) >= parseInt(convertedTp1[0]) && parseInt(convertedTp2[1]) >= parseInt(convertedTp1[1])){
-                var hrs = parseInt(convertedTp2[0]) - parseInt(convertedTp1[0]);
+            var hrsTin = parseInt(convertedTp1[0]);
+            var hrsTout = parseInt(convertedTp2[0]);
+            var minsTin = parseInt(convertedTp1[1]);
+            var minsTout = parseInt(convertedTp2[1]);
+
+            if( (hrsTout > hrsTin) || ( (hrsTin == hrsTout) && (minsTout >= minsTin) ) ){
+                var hrs = hrsTout - hrsTin;
                 var mins;
-                if(parseInt(convertedTp2[1]) >= parseInt(convertedTp1[1])){
-                    mins = parseInt(convertedTp2[1]) - parseInt(convertedTp1[1])
+                if(minsTout >= minsTin){
+                    mins = minsTout - minsTin;
                 }else{
                     hrs = hrs - 1;
-                    mins = parseInt(convertedTp1[1]) - parseInt(convertedTp2[1]);
+                    mins = minsTin - minsTout;
                     mins = 60 - mins;
                 }
 
@@ -120,7 +124,30 @@ var calculateHrs = function(){
         }
     }
 }
+var calculateOverTotal = function(){
+    var wk1 = $(".weekTotal").eq(0).text().split(":");
+    var wk2 = $(".weekTotal").eq(1).text().split(":");
 
+    var week1Hrs = parseInt(wk1[0]);
+    var week2Hrs = parseInt(wk2[0]);
+    var week1Mins = parseInt(wk1[1]);
+    var week2Mins = parseInt(wk2[1]);
+
+    var weekHrs = week1Hrs + week2Hrs;
+    var weekMins = week1Mins + week2Mins;
+    if(weekMins == 60){
+        weekMins = 0;
+        weekHrs = weekHrs + 1;
+    }
+
+    var sHours = weekHrs.toString();
+    var sMinutes = weekMins.toString();
+    if(weekHrs<10) sHours = "0" + sHours;
+    if(weekMins<10) sMinutes = "0" + sMinutes;
+    $(".overAllTotal").html(sHours + ":" + sMinutes);
+    // var total = weekHrs 
+    console.log("overallTotal: " +  sHours + ":" + sMinutes);
+}
 var convertTime = function(time){
     var hours = Number(time.match(/^(\d+)/)[1]);
     var minutes = Number(time.match(/:(\d+)/)[1]);
@@ -141,10 +168,10 @@ var setTemplate = function(){
     var html    = template(context);
     $("#tBodyContent").html(html);
 }
-var addWeekHrs = function(){
+var addWeekHrs = function(args){
     var totalHrs = 0;
     var totalMins = 0;
-    for(i=0; i < 7; i++){
+    for(i=args.start; i < args.end; i++){
         var r = $(".results").eq(i).text();
         if(r.length != 0){
             var convertedTime = r.split(":");
@@ -167,9 +194,14 @@ var addWeekHrs = function(){
     console.log("Total HOURS: " +sTotalHours);
     console.log("Total MINS: " +sTotalMinutes);
 
-    $(".weekTotal").eq(0).html(sTotalHours+":"+sTotalMinutes);
+    $(".weekTotal").eq(args.week).html(sTotalHours+":"+sTotalMinutes);
 }
-
+var addWeek1 = function(){
+    addWeekHrs({start:0, end:7, week:0});
+}
+var addWeek2 = function(){
+    addWeekHrs({start:7, end:14, week:1});
+}
 $(document).ready(function() {
     curr = curr.addWeeks(-2);
     /* code here */ 
@@ -184,8 +216,9 @@ $(document).ready(function() {
     $(document).on("click", "#previous", prevClick);
     $(document).on("click", "#next", nextClick);
     $(document).on("click", "body", calculateHrs);
-    $(document).on("click", "body", addWeekHrs);
-
+    $(document).on("click", "body", addWeek1);
+    $(document).on("click", "body", addWeek2);
+    $(document).on("click", "body", calculateOverTotal);
 
     $("#settingsModal").keypress(function(e) {
         var key = e.which;
