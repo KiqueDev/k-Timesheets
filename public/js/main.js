@@ -241,6 +241,10 @@ $(document).ready(function() {
     curr = curr.addWeeks(-2);
 
     contactInfo = $.jStorage.get("contactInfo");
+    
+    if($.trim(contactInfo["lastName"]).length == 0){
+        $(".settingsBtn").click();
+    }
 
     getBiWeekly();
 
