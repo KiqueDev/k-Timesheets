@@ -46,7 +46,7 @@ var getBiWeekly = function(){
         }
     }
     payRoll = firstPayRoll + " - " + lastPayroll;
-    console.log(context);
+    //console.log(context);
     $("#payRoll").text(payRoll);
     setTemplate();
 }
@@ -264,6 +264,11 @@ $(document).ready(function() {
     $(document).on("click", ".clearAll", clearAllBtn);
 
     $(document).on("click", ".pdfBtn", createPDF);
+
+    $(document).on("hidden.bs.modal", "#settingsModal", function () {
+      // do something…
+      $("#saveButton").click();
+    })
 
     $("#settingsModal").keypress(function(e) {
         var key = e.which;
