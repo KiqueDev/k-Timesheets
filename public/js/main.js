@@ -204,15 +204,14 @@ var addWeek2 = function(){
 }
 var clearBtn = function(e){
     var id = e.target.id-1;
-    $(".tp1").eq(id).val("");
-    $(".tp2").eq(id).val("");
+    $(".tp1").eq(id).timepicker('setTime', '');
+    $(".tp2").eq(id).timepicker('setTime', '');
     $(".mealTime").eq(id).attr("disabled","disabled");
     $(".mealTime").eq(id).text("0:00");
     //$(".results").eq(0).text("");
 }
 var clearAllBtn = function(){
-    $(".tp1").val("");
-    $(".tp2").val("");
+    $('.tp1, .tp2').timepicker('setTime', '');
     $(".mealTime").attr("disabled","disabled");
     $(".mealTime").text("0:00");
     //$(".results").eq(0).text("");
