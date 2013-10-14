@@ -135,9 +135,9 @@ var calculateOverTotal = function(){
 
     var weekHrs = week1Hrs + week2Hrs;
     var weekMins = week1Mins + week2Mins;
-    if(weekMins == 60){
-        weekMins = 0;
+    if(weekMins >= 60){
         weekHrs = weekHrs + 1;
+        weekMins = weekMins - 60;
     }
 
     var sHours = weekHrs.toString();
