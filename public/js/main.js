@@ -237,7 +237,7 @@ var saveButton = function(){
 }
 
 $(document).ready(function() {
-    curr = curr.addWeeks(-2);
+    curr = curr.addWeeks(-1);
 
     contactInfo = $.jStorage.get("contactInfo");
 
@@ -268,6 +268,7 @@ $(document).ready(function() {
       // do something…
       $("#saveButton").click();
     })
+
 
     $("#settingsModal").keypress(function(e) {
         var key = e.which;

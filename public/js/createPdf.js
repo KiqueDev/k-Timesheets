@@ -1,17 +1,17 @@
 var createPDF = function(){
 
 	var doc = new jsPDF();
-
+	doc.setFont("times");
 	doc.setFontSize(12);
 	doc.text(40, 25, "NON-TEACHING ADJUNCT and CONTINUING EDUCATION TEACHERS");
-	doc.text(40, 30, "                                            TIME SHEET");
-	doc.text(40, 35, "                              BROOKLYN COLLEGE PAYROLL");
-	doc.text(40, 40, "                                                OFFICE");
+	doc.text(40, 30, "                                                   TIME SHEET");
+	doc.text(40, 35, "                                  BROOKLYN COLLEGE PAYROLL");
+	doc.text(40, 40, "                                                       OFFICE");
 	doc.text(20, 50, "PAYROLL TITLE         NT-Adjunct");
 	doc.line(55, 51, 100, 51); 
 	// Empty square
 	doc.rect(20, 60, 65, 25);
-	doc.text(22, 65, "DEPT#     EXP CODE    RATE");
+	doc.text(22, 65, "DEPT#       EXP CODE    RATE");
 	doc.line(20, 67, 85, 67);
 	doc.line(40, 60, 40, 85);
 	doc.line(65, 60, 65, 85);
@@ -33,8 +33,8 @@ var createPDF = function(){
 	doc.line(135, 96, 185, 96); 
 
 	doc.rect(20, 105, 170, 120);
-	doc.text(21, 111, "                                             Time       Meal       Time         Work");
-	doc.text(21, 116, "No     Day       Date                In          Period     Out           Hrs                   Signature");
+	doc.text(21, 111, "                                                   Time       Meal         Time           Work");
+	doc.text(21, 116, "No     Day              Date              In           Period       Out              Hrs                   Signature");
 	doc.line(20, 120, 190, 120);
 
 
@@ -129,7 +129,11 @@ var createPDF = function(){
 	doc.text(130, 230, wk2Total);
 	doc.text(130, 239, overAllTotal);
 
-	var string = doc.output('datauristring');
-	$('.preview-pane').attr('src', string);
-
+	// var string = doc.output('datauristring');
+	// console.log(string);
+	// $('.preview-pane').attr('src', string);
+	  var string = doc.output('datauristring');
+	  var x = window.open();
+	  x.document.open();
+	  x.document.location=string;
 }

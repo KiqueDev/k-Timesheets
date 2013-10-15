@@ -49,3 +49,9 @@ span{
 .weekTotal, .overAllTotal{
 	font-weight:bold;
 }
+
+.preview-pane{
+	width:100%;
+	height:650px;
+	border:0;
+}
