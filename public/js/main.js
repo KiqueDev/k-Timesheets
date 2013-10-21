@@ -98,7 +98,7 @@ var calculateHrs = function(){
 
 
                 //meal time deduct
-                if(hrs >= 5){
+                if(hrs >= 5 && mins >= 15){
                     $(".mealTime").eq(i).html("0:30");
                     $(".mealTime").eq(i).removeAttr("disabled");
  
