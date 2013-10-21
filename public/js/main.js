@@ -15,6 +15,7 @@ var nextClick = function(e){
     console.log(curr);
     getBiWeekly();
      $('.tp1, .tp2').timepicker('setTime', '');
+     disableTimeTextfield();
 }
 var prevClick = function(e){
     e.preventDefault();
@@ -22,6 +23,7 @@ var prevClick = function(e){
     getBiWeekly();
     console.log(curr);
     $('.tp1, .tp2').timepicker('setTime', '');
+    disableTimeTextfield();
 }
 var getBiWeekly = function(){
     var days = ['SUN','MON','TUES','WED','THURS','FRI','SAT'];
@@ -206,12 +208,14 @@ var clearBtn = function(e){
     var id = e.target.id-1;
     $(".tp1").eq(id).timepicker('setTime', '');
     $(".tp2").eq(id).timepicker('setTime', '');
+    disableTimeTextfield();
     $(".mealTime").eq(id).attr("disabled","disabled");
     $(".mealTime").eq(id).text("0:00");
     //$(".results").eq(0).text("");
 }
 var clearAllBtn = function(){
     $('.tp1, .tp2').timepicker('setTime', '');
+    disableTimeTextfield();
     $(".mealTime").attr("disabled","disabled");
     $(".mealTime").text("0:00");
     //$(".results").eq(0).text("");
@@ -234,6 +238,10 @@ var saveButton = function(){
     appendContact();
 
     $('#settingsModal').modal('hide');
+}
+
+var disableTimeTextfield = function(){
+    $(".bootstrap-timepicker-hour, .bootstrap-timepicker-minute, .bootstrap-timepicker-meridian").attr("disabled", "disabled");
 }
 
 $(document).ready(function() {
@@ -277,5 +285,6 @@ $(document).ready(function() {
         }
     });
     $('.tp1, .tp2').timepicker('setTime', '');
+    disableTimeTextfield();
 });
 
