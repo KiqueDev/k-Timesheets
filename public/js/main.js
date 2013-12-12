@@ -254,7 +254,7 @@ $(document).ready(function() {
         curr.addWeeks(2);
 
     // Put Back to Original
-    curr.addWeeks(-2);
+    curr.addWeeks(-4);
 
     contactInfo = $.jStorage.get("contactInfo");
 
