@@ -1,5 +1,5 @@
-
-var curr =  Date.today().previous().saturday();// get current date
+var curr = new Date(Date.today().getFullYear(), Date.today().getMonth(), 0);// First day of Month
+// var curr =  Date.today().previous().saturday();// get current date
 var context = {}
 var contactInfo = {
     lastName:"",
@@ -11,7 +11,7 @@ var payRoll = "";
 
 var nextClick = function(e){
     e.preventDefault();
-    curr = curr.addWeeks(0);
+    curr.addWeeks(0);
     console.log(curr);
     getBiWeekly();
      $('.tp1, .tp2').timepicker('setTime', '');
@@ -19,7 +19,7 @@ var nextClick = function(e){
 }
 var prevClick = function(e){
     e.preventDefault();
-    curr = curr.addWeeks(-4);
+    curr.addWeeks(-4);
     getBiWeekly();
     console.log(curr);
     $('.tp1, .tp2').timepicker('setTime', '');
@@ -245,7 +245,16 @@ var disableTimeTextfield = function(){
 }
 
 $(document).ready(function() {
-    curr = curr.addWeeks(-2);
+    //Check which payment of the biWeek
+    var future = curr.addWeeks(2);
+    console.log("FUTURE: ", future);
+    var today = Date.today();
+    console.log("TODAY:", today);
+    if(today.compareTo(future) > 0)
+        curr.addWeeks(2);
+
+    // Put Back to Original
+    curr.addWeeks(-2);
 
     contactInfo = $.jStorage.get("contactInfo");
 
